@@ -29,4 +29,18 @@ public class AtividadeService {
         //Retornar um objeto DTO para o Controller
         return dto;
     }
+
+    @Transactional
+    public AtividadeDTO insert(AtividadeDTO dto){
+        Atividade entity = new Atividade();
+
+        entity.setNome(dto.getNome());
+        entity.setDescricao(dto.getDescricao());
+        entity.setPreco(dto.getPreco());
+
+        entity = repository.save(entity);
+
+        return new AtividadeDTO(entity);
+
+    }
 }

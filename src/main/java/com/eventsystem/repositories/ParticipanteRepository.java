@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface ParticipanteRepository extends JpaRepository<Participante, String>{
-    Optional<Participante> findByNome(String nome);
-}
+public interface ParticipanteRepository extends JpaRepository<Participante, Long>{}

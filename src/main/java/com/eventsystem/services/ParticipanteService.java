@@ -18,8 +18,8 @@ public class ParticipanteService {
     private ParticipanteRepository repository;
 
     @Transactional(readOnly = true)
-    public ParticipanteDTO findByName(String nome){
-        Optional<Participante> result = repository.findByNome(nome);
+    public ParticipanteDTO findById(Long id){
+        Optional<Participante> result = repository.findById(id);
 
         Participante participante = result.get();
 
@@ -28,5 +28,33 @@ public class ParticipanteService {
         return dto;
     }
 
+    @Transactional
+    public ParticipanteDTO insert(ParticipanteDTO dto){
+        Participante entity = new Participante();
 
+        entity.setNome(dto.getNome());
+        entity.setEmail(dto.getEmail());
+
+        entity = repository.save(entity);
+
+
+        return new ParticipanteDTO(entity);
+    }
+
+    public ParticipanteDTO update(Long id, ParticipanteDTO dto){
+
+        Participante entity = repository.getReferenceById(id);
+
+        copyDtoToEntity(dto, entity);
+
+        entity = repository.save(entity);
+
+        return new ParticipanteDTO(entity);
+
+    }
+
+    private void copyDtoToEntity(ParticipanteDTO dto, Participante entity) {
+        entity.setNome(dto.getNome());
+        entity.setEmail(dto.getEmail());
+    }
 }
