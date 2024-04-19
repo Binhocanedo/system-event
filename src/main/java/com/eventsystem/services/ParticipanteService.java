@@ -41,6 +41,7 @@ public class ParticipanteService {
         return new ParticipanteDTO(entity);
     }
 
+    @Transactional
     public ParticipanteDTO update(Long id, ParticipanteDTO dto){
 
         Participante entity = repository.getReferenceById(id);
@@ -51,6 +52,10 @@ public class ParticipanteService {
 
         return new ParticipanteDTO(entity);
 
+    }
+    @Transactional
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 
     private void copyDtoToEntity(ParticipanteDTO dto, Participante entity) {

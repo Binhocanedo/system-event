@@ -37,10 +37,14 @@ public class ParticipanteController {
         return ResponseEntity.created(uri).body(dto);
     }
 
-    @Transactional
     @PutMapping("/{id}")
     public ResponseEntity<ParticipanteDTO> update(@PathVariable Long id, @RequestBody ParticipanteDTO dto){
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
+    }
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

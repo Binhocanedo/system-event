@@ -49,6 +49,11 @@ public class AtividadeService {
         return new AtividadeDTO(entity);
     }
 
+    @Transactional
+    public void delete(Integer id){
+        repository.deleteById(id);
+    }
+
     public void copyDtoToEntity(Atividade entity, AtividadeDTO dto){
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());

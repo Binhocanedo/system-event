@@ -32,8 +32,15 @@ public class AtividadeController {
         return ResponseEntity.created(uri).body(dto);
     }
 
+    @PutMapping(value = "/{id}")
     public ResponseEntity<AtividadeDTO> update(@PathVariable Integer id, @RequestBody AtividadeDTO dto){
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
