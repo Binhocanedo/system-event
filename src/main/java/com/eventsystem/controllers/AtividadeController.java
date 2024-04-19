@@ -31,4 +31,9 @@ public class AtividadeController {
 
         return ResponseEntity.created(uri).body(dto);
     }
+
+    public ResponseEntity<AtividadeDTO> update(@PathVariable Integer id, @RequestBody AtividadeDTO dto){
+        dto = service.update(id, dto);
+        return ResponseEntity.ok(dto);
+    }
 }

@@ -34,13 +34,24 @@ public class AtividadeService {
     public AtividadeDTO insert(AtividadeDTO dto){
         Atividade entity = new Atividade();
 
-        entity.setNome(dto.getNome());
-        entity.setDescricao(dto.getDescricao());
-        entity.setPreco(dto.getPreco());
+        copyDtoToEntity(entity, dto);
 
         entity = repository.save(entity);
 
         return new AtividadeDTO(entity);
+    }
 
+    @Transactional
+    public AtividadeDTO update(Integer id, AtividadeDTO dto){
+        Atividade entity = repository.getReferenceById(id);
+        copyDtoToEntity(entity, dto);
+        entity = repository.save(entity);
+        return new AtividadeDTO(entity);
+    }
+
+    public void copyDtoToEntity(Atividade entity, AtividadeDTO dto){
+        entity.setNome(dto.getNome());
+        entity.setDescricao(dto.getDescricao());
+        entity.setPreco(dto.getPreco());
     }
 }
